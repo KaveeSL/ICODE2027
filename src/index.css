@@ -1,0 +1,152 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter Tight", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-serif: "Instrument Serif", ui-serif, Georgia, serif;
+
+  --color-ink: #0a0a0a;
+  --color-ink-soft: #101010;
+  --color-muted: #6b6b6b;
+  --color-surface: #f5f5f7;
+  --color-surface-2: #eeeeef;
+  --color-line: #e8e8ea;
+  --color-lime: #e0ff32;
+  --color-lime-deep: #d4f528;
+  --color-teal: #009767;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-white text-ink font-sans antialiased;
+    font-feature-settings: "ss01" on, "cv11" on;
+  }
+
+  img,
+  video,
+  iframe,
+  svg {
+    max-width: 100%;
+  }
+
+  ::selection {
+    background: color-mix(in oklab, var(--color-lime) 55%, white);
+    color: var(--color-ink);
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes soft-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.animate-fade-in {
+  animation: fade-in 0.7s ease both;
+}
+
+.animate-soft-float {
+  animation: soft-float 5s ease-in-out infinite;
+}
+
+/* Hero live text — soft glow on year, shine on subtitle (no clip/cutoff) */
+@keyframes hero-year-glow {
+  0%,
+  100% {
+    filter: brightness(1);
+    text-shadow: 0 0 0 transparent;
+  }
+  50% {
+    filter: brightness(1.12);
+    text-shadow: 0 0 22px rgb(224 255 50 / 0.35);
+  }
+}
+
+@keyframes hero-shine {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.hero-year-live {
+  animation: hero-year-glow 3.6s ease-in-out infinite;
+}
+
+.hero-subtitle-live {
+  background-image: linear-gradient(
+    90deg,
+    rgb(255 255 255 / 1) 0%,
+    rgb(255 255 255 / 1) 38%,
+    rgb(224 255 50 / 0.95) 50%,
+    rgb(255 255 255 / 1) 62%,
+    rgb(255 255 255 / 1) 100%
+  );
+  background-size: 220% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: hero-shine 16s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-up,
+  .animate-fade-in,
+  .animate-soft-float,
+  .hero-year-live,
+  .hero-subtitle-live {
+    animation: none !important;
+  }
+
+  .hero-year-live {
+    filter: none;
+    text-shadow: none;
+  }
+
+  .hero-subtitle-live {
+    color: white;
+    background: none;
+    -webkit-background-clip: unset;
+    background-clip: unset;
+  }
+}
