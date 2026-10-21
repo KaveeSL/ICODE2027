@@ -23,7 +23,10 @@ export function Footer() {
             </p>
             <h2 className="mx-auto mt-4 max-w-3xl text-[1.5rem] font-medium leading-[1.12] tracking-[-0.02em] text-balance sm:mt-5 sm:text-5xl sm:leading-[1.08]">
               Join the community shaping digital learning for{' '}
-              <span className="font-serif italic font-normal text-lime">2027</span>.
+              <span className="inline-block pr-[0.12em] font-serif italic font-normal text-lime">
+                2027
+              </span>
+              .
             </h2>
             <div className="mt-7 flex flex-col items-stretch justify-center gap-2.5 sm:mt-8 sm:flex-row sm:flex-wrap sm:items-center sm:gap-3">
               <Button to="/call-for-papers" variant="lime" className="w-full !px-6 !py-3 sm:w-auto">

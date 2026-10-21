@@ -88,10 +88,10 @@ export function Navbar() {
       <div
         className={`lg:hidden fixed top-3 inset-x-0 z-50 mx-auto flex w-[min(95vw,100%-1rem)] max-w-full items-center justify-between gap-1.5 rounded-full px-2.5 py-2 transition-all duration-500 ease-out sm:gap-2 sm:px-3 ${mobileShell}`}
       >
-        <div className="flex min-w-0 flex-1 items-center gap-1.5 overflow-hidden sm:gap-2">
+        <div className="flex min-w-0 flex-1 items-center gap-1.5 overflow-visible sm:gap-2">
           <HostLogos variant="nav" className="shrink-0 [&_img]:!h-6 sm:[&_img]:!h-7" />
           <span className="hidden h-5 w-px shrink-0 bg-white/15 min-[360px]:block" aria-hidden />
-          <BrandMark size="sm" light className="min-w-0 truncate" />
+          <BrandMark size="sm" light className="min-w-0 shrink" />
         </div>
         <div className="flex shrink-0 items-center gap-1.5 sm:gap-2">
           <Button to={site.submitUrl} variant="lime" className="!px-2.5 !py-1.5 text-[11px] font-semibold sm:!px-3 sm:text-xs">

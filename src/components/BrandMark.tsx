@@ -33,15 +33,18 @@ export function BrandMark({
 
   const content = (
     <motion.span
-      className={`group inline-flex max-w-full items-center ${className}`}
+      className={`group inline-flex max-w-full items-center overflow-visible ${className}`}
       whileHover={{ scale: 1.02 }}
       transition={{ type: 'spring', stiffness: 400, damping: 24 }}
     >
       <span
-        className={`block max-w-full truncate leading-none font-medium ${s.word} ${light ? 'text-white' : 'text-black'}`}
+        className={`block max-w-full overflow-visible whitespace-nowrap leading-none font-medium ${s.word} ${light ? 'text-white' : 'text-black'}`}
       >
         ICODE
-        <span className={`font-serif italic font-normal tracking-normal ${accent}`}>
+        {/* pr keeps italic “7” from clipping; Instrument Serif overhangs the box */}
+        <span
+          className={`inline-block overflow-visible pr-[0.14em] font-serif italic font-normal tracking-normal ${accent}`}
+        >
           2027
         </span>
       </span>
