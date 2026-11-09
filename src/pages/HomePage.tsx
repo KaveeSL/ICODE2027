@@ -2,7 +2,6 @@ import { useEffect, useRef, useState, type RefObject } from 'react'
 import { motion, useReducedMotion, useScroll, useTransform, type MotionValue } from 'framer-motion'
 import {
   Building2,
-  CalendarDays,
   Globe2,
   GraduationCap,
   Handshake,
@@ -355,7 +354,7 @@ export function HomePage() {
                     <ul className="mt-5 space-y-2 text-sm text-black/80">
                       {day.points.map((point) => (
                         <li key={point} className="flex gap-2">
-                          <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-lime" />
+                          <span className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-teal" />
                           {point}
                         </li>
                       ))}
@@ -458,29 +457,50 @@ export function HomePage() {
                 description="A quick overview for prospective authors, participants, and partners."
               />
             </Reveal>
-            <div className="mt-12 space-y-3">
-              {importantDates.map((item, i) => (
-                <Reveal key={item.label} delay={i * 0.05}>
-                  <motion.div
-                    whileHover={{ x: 4 }}
-                    transition={{ type: 'spring', stiffness: 400, damping: 28 }}
-                    className="flex flex-col gap-3 rounded-2xl border border-white/10 bg-white/5 px-5 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-6"
-                  >
-                    <div className="flex items-start gap-3">
-                      <span className="mt-0.5 inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-lime/90 text-black">
-                        <CalendarDays className="h-4 w-4" strokeWidth={1.8} />
-                      </span>
+            <div className="mt-12">
+              <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+                {importantDates
+                  .filter((item) => item.status !== 'event')
+                  .map((item, i) => (
+                    <Reveal key={item.label} delay={i * 0.05} className="h-full">
+                      <motion.div
+                        whileHover={{ y: -4 }}
+                        transition={{ type: 'spring', stiffness: 360, damping: 24 }}
+                        className="flex h-full flex-col rounded-2xl border border-white/10 bg-white/5 p-5"
+                      >
+                        <div className="flex items-center justify-between gap-3">
+                          <span className="pr-[0.12em] font-serif text-2xl italic leading-none text-lime">
+                            {String(i + 1).padStart(2, '0')}
+                          </span>
+                          <span className="rounded-full border border-white/20 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-white/80">
+                            {item.date}
+                          </span>
+                        </div>
+                        <p className="mt-6 text-sm font-medium tracking-tight">{item.label}</p>
+                        <p className="mt-1.5 text-sm leading-relaxed text-white/55">{item.note}</p>
+                      </motion.div>
+                    </Reveal>
+                  ))}
+              </div>
+              {importantDates
+                .filter((item) => item.status === 'event')
+                .map((item) => (
+                  <Reveal key={item.label} delay={0.2}>
+                    <div className="mt-3 flex flex-col gap-4 rounded-2xl bg-lime px-5 py-5 text-black sm:flex-row sm:items-end sm:justify-between sm:px-7 sm:py-6">
                       <div>
-                        <p className="text-sm font-medium tracking-tight">{item.label}</p>
-                        <p className="mt-1 text-sm text-white/55">{item.note}</p>
+                        <p className="text-[11px] font-medium uppercase tracking-[0.16em] text-black/55">
+                          {item.note}
+                        </p>
+                        <p className="mt-2 text-2xl font-medium tracking-tight sm:text-3xl">
+                          <SerifAccent>{item.label}</SerifAccent>
+                        </p>
                       </div>
+                      <p className="pr-[0.12em] font-serif text-2xl italic leading-none tracking-tight sm:text-right sm:text-[1.75rem]">
+                        {item.date}
+                      </p>
                     </div>
-                    <span className="inline-flex w-fit rounded-full bg-lime px-4 py-1.5 text-sm font-semibold text-black">
-                      {item.date}
-                    </span>
-                  </motion.div>
-                </Reveal>
-              ))}
+                  </Reveal>
+                ))}
             </div>
           </div>
         </section>
