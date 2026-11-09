@@ -4,7 +4,7 @@ import { footerNav, pageLinks, site } from '../data/site'
 import { BrandMark } from './BrandMark'
 import { DottedBrandMark } from './DottedBrandMark'
 import { HostLogos } from './HostLogos'
-import { Button } from './ui'
+import { Button, SerifAccent } from './ui'
 import { WhatsAppIcon } from './WhatsAppIcon'
 
 export function Footer() {

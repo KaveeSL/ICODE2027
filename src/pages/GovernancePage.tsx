@@ -1,5 +1,5 @@
 import { governanceGroups } from '../data/site'
-import { PageHero, Reveal, SoftCard } from '../components/ui'
+import { PageHero, Reveal, SerifAccent, SoftCard } from '../components/ui'
 
 export function GovernancePage() {
   return (
@@ -19,7 +19,10 @@ export function GovernancePage() {
           {governanceGroups.map((group, i) => (
             <Reveal key={group.id} delay={i * 0.05}>
               <div id={group.id} className="scroll-mt-28">
-                <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">{group.title}</h2>
+                <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">
+                  {group.title.slice(0, group.title.lastIndexOf(' '))}{' '}
+                  <SerifAccent>{group.title.slice(group.title.lastIndexOf(' ') + 1)}</SerifAccent>
+                </h2>
                 <p className="mt-2 max-w-3xl text-muted">{group.description}</p>
                 <div className="mt-6 grid gap-3 md:grid-cols-2">
                   {group.people.map((person) => (

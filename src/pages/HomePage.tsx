@@ -1,5 +1,5 @@
-import { useRef, useState, type RefObject } from 'react'
-import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion'
+import { useEffect, useRef, useState, type RefObject } from 'react'
+import { motion, useReducedMotion, useScroll, useTransform, type MotionValue } from 'framer-motion'
 import {
   Building2,
   CalendarDays,
@@ -42,56 +42,106 @@ const audienceIcons = [GraduationCap, Users, Building2]
 
 function Hero({ pinRef }: { pinRef: RefObject<HTMLDivElement | null> }) {
   const reduce = useReducedMotion()
+  // Same curves as before, but on the scroll timeline so the phone does not
+  // wait on a JavaScript listener. Older browsers keep the motion values.
+  const [nativeScroll] = useState(
+    () => typeof CSS !== 'undefined' && CSS.supports('animation-timeline', 'view()'),
+  )
+  if (!reduce && !nativeScroll) return <HeroJsScroll pinRef={pinRef} />
+  return <HeroFrame nativeScroll={!reduce && nativeScroll} />
+}
+
+function HeroJsScroll({ pinRef }: { pinRef: RefObject<HTMLDivElement | null> }) {
+  const { scrollYProgress } = useScroll({
+    target: pinRef,
+    offset: ['start start', 'end start'],
+  })
+  const bgScale = useTransform(scrollYProgress, [0, 0.7], [1, 1.5])
+  const copyOpacity = useTransform(scrollYProgress, [0, 0.45], [1, 0])
+  const copyY = useTransform(scrollYProgress, [0, 0.55], [0, -110])
+  return (
+    <HeroFrame
+      nativeScroll={false}
+      bgScale={bgScale}
+      copyOpacity={copyOpacity}
+      copyY={copyY}
+    />
+  )
+}
+
+function HeroFrame({
+  nativeScroll,
+  bgScale,
+  copyOpacity,
+  copyY,
+}: {
+  nativeScroll: boolean
+  bgScale?: MotionValue<number>
+  copyOpacity?: MotionValue<number>
+  copyY?: MotionValue<number>
+}) {
+  const reduce = useReducedMotion()
   // Same loop, smaller decode on phones. Chosen once so scrolling never swaps the clip.
   const [heroVideo] = useState(() =>
     window.matchMedia('(max-width: 767px)').matches
       ? publicAsset('/videos/hero-hall-loop-mobile.mp4')
       : publicAsset('/videos/hero-hall-loop.mp4'),
   )
-  // Track the tall pin container (Ceynk: h-[250svh]) — sticky alone doesn't advance progress
-  const { scrollYProgress } = useScroll({
-    target: pinRef,
-    offset: ['start start', 'end start'],
-  })
-  const bgScale = useTransform(scrollYProgress, [0, 0.7], reduce ? [1, 1] : [1, 1.5])
-  const copyOpacity = useTransform(scrollYProgress, [0, 0.45], reduce ? [1, 1] : [1, 0])
-  const copyY = useTransform(scrollYProgress, [0, 0.55], reduce ? [0, 0] : [0, -110])
+  const bgRef = useRef<HTMLDivElement>(null)
+  const copyRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (nativeScroll || !bgScale || !copyOpacity || !copyY) return
+    const apply = () => {
+      const scale = bgScale.get()
+      const opacity = copyOpacity.get()
+      const y = copyY.get()
+      if (bgRef.current) bgRef.current.style.transform = `scale(${scale})`
+      if (copyRef.current) {
+        copyRef.current.style.opacity = String(opacity)
+        copyRef.current.style.transform = `translateY(${y}px)`
+      }
+    }
+    apply()
+    const stops = [bgScale.on('change', apply), copyOpacity.on('change', apply), copyY.on('change', apply)]
+    return () => stops.forEach((stop) => stop())
+  }, [nativeScroll, bgScale, copyOpacity, copyY])
+
+  const background = (
+    <>
+      {reduce ? (
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: `url('${publicAsset('/images/hero-bg.jpg')}')` }}
+        />
+      ) : (
+        <video
+          className="pointer-events-none absolute inset-0 h-full w-full object-cover"
+          autoPlay
+          muted
+          loop
+          playsInline
+          poster={publicAsset('/images/hero-bg.jpg')}
+          preload="metadata"
+        >
+          <source src={heroVideo} type="video/mp4" />
+        </video>
+      )}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-black/45" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_40%,rgb(0_0_0_/_0.3)_100%)]" />
+    </>
+  )
+  const bgClass = `pointer-events-none absolute inset-0 z-0 bg-[#050505] ${nativeScroll ? 'hero-bg-zoom' : ''}`
 
   return (
-    <section
-      className="sticky top-0 z-0 h-svh w-full overflow-hidden"
-    >
-      <motion.div
-        className="absolute inset-0 z-0 bg-[#050505] transform-gpu will-change-transform"
-        style={{ scale: bgScale }}
-        aria-hidden
-      >
-        {reduce ? (
-          <div
-            className="absolute inset-0 bg-cover bg-center"
-            style={{ backgroundImage: `url('${publicAsset('/images/hero-bg.jpg')}')` }}
-          />
-        ) : (
-          <video
-            className="absolute inset-0 h-full w-full object-cover [transform:translateZ(0)]"
-            autoPlay
-            muted
-            loop
-            playsInline
-            poster={publicAsset('/images/hero-bg.jpg')}
-            preload="metadata"
-          >
-            <source src={heroVideo} type="video/mp4" />
-          </video>
-        )}
-        {/* Scrim for white hero type over dark conference hall */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-black/45" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_40%,rgb(0_0_0_/_0.3)_100%)]" />
-      </motion.div>
+    <section className="sticky top-0 z-0 h-svh w-full touch-pan-y overflow-hidden">
+      <div ref={bgRef} className={bgClass} aria-hidden>
+        {background}
+      </div>
 
-      <motion.div
-        style={{ opacity: copyOpacity, y: copyY }}
-        className="absolute inset-x-0 top-[18svh] z-30 flex flex-col items-center px-5 text-center will-change-transform sm:top-[14svh] sm:px-6"
+      <div
+        ref={copyRef}
+        className={`absolute inset-x-0 top-[18svh] z-30 flex flex-col items-center px-5 text-center sm:top-[14svh] sm:px-6 ${nativeScroll ? 'hero-copy-scroll' : ''}`}
       >
         <motion.div
           initial={reduce ? false : { opacity: 0, y: 28 }}
@@ -109,9 +159,9 @@ function Hero({ pinRef }: { pinRef: RefObject<HTMLDivElement | null> }) {
                 ? undefined
                 : {
                     borderColor: [
-                      'rgb(224 255 50 / 0.4)',
-                      'rgb(224 255 50 / 0.85)',
-                      'rgb(224 255 50 / 0.4)',
+                      'rgb(254 208 0 / 0.4)',
+                      'rgb(254 208 0 / 0.85)',
+                      'rgb(254 208 0 / 0.4)',
                     ],
                   }
             }
@@ -192,7 +242,7 @@ function Hero({ pinRef }: { pinRef: RefObject<HTMLDivElement | null> }) {
             </Button>
           </div>
         </motion.div>
-      </motion.div>
+      </div>
 
       <div className="pointer-events-none absolute inset-x-0 bottom-0 z-20 h-32 bg-gradient-to-t from-black/20 to-transparent" />
     </section>
@@ -205,7 +255,7 @@ export function HomePage() {
   return (
     <>
       {/* Ceynk pin: tall wrapper so sticky hero can zoom/fade while scrolling */}
-      <div id="home" ref={pinRef} className="relative h-[220svh] lg:h-[250svh]">
+      <div id="home" ref={pinRef} className="hero-pin relative h-[220svh] lg:h-[250svh]">
         <Hero pinRef={pinRef} />
       </div>
 
@@ -222,8 +272,8 @@ export function HomePage() {
                     About
                   </p>
                   <h2 className="mt-3 text-[2rem] font-medium leading-[1.08] tracking-[-0.02em] text-balance sm:text-4xl lg:text-5xl">
-                    Designing the next generation of <SerifAccent>open</SerifAccent> and digital
-                    education.
+                    Designing the next generation of <SerifAccent>open</SerifAccent> and{' '}
+                    <SerifAccent>digital</SerifAccent> education.
                   </h2>
                 </div>
                 <p className="text-sm leading-relaxed tracking-tight text-black/55 md:text-base lg:pb-1">
@@ -286,7 +336,8 @@ export function HomePage() {
                 eyebrow="Programme"
                 title={
                   <>
-                    A two-day <SerifAccent>integrated</SerifAccent> programme
+                    A two-day <SerifAccent>integrated</SerifAccent>{' '}
+                    <SerifAccent>programme</SerifAccent>
                   </>
                 }
                 description="From peer-reviewed research to hands-on workshops — each day builds on the last."
@@ -327,7 +378,7 @@ export function HomePage() {
                 eyebrow="Why participate"
                 title={
                   <>
-                    Join a focused community at the intersection of{' '}
+                    Join a focused <SerifAccent>community</SerifAccent> at the intersection of{' '}
                     <SerifAccent>research and practice</SerifAccent>.
                   </>
                 }
@@ -373,7 +424,10 @@ export function HomePage() {
                           <Icon className="h-4 w-4" strokeWidth={1.8} />
                         </span>
                         <div>
-                          <h3 className="text-base font-medium tracking-tight">{item.title}</h3>
+                          <h3 className="text-base font-medium tracking-tight">
+                            {item.title.slice(0, item.title.lastIndexOf(' '))}{' '}
+                            <SerifAccent>{item.title.slice(item.title.lastIndexOf(' ') + 1)}</SerifAccent>
+                          </h3>
                           <p className="mt-1.5 text-sm leading-relaxed text-black/55">
                             {item.detail}
                           </p>

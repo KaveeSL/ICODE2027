@@ -1,5 +1,5 @@
 import { programmeDays } from '../data/site'
-import { Button, PageHero, Reveal, SoftCard, TextLink } from '../components/ui'
+import { Button, PageHero, Reveal, SerifAccent, SoftCard, TextLink } from '../components/ui'
 
 export function ProgrammePage() {
   return (
@@ -35,7 +35,7 @@ export function ProgrammePage() {
                       {day.day} · {day.date}
                     </p>
                     <h2 className="mt-2 text-2xl font-semibold tracking-tight sm:text-3xl">
-                      {day.title}
+                      <SerifAccent>{day.title}</SerifAccent>
                     </h2>
                     <p className="mt-3 text-sm leading-relaxed text-muted sm:text-base">
                       {day.summary}

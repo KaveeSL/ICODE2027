@@ -1,5 +1,5 @@
 import { themes } from '../data/site'
-import { Button, PageHero, Reveal, SoftCard } from '../components/ui'
+import { Button, PageHero, Reveal, SerifAccent, SoftCard } from '../components/ui'
 
 export function ProceedingsPage() {
   return (
@@ -22,7 +22,9 @@ export function ProceedingsPage() {
       <section className="px-5 py-16 sm:px-8 sm:py-20">
         <div className="mx-auto max-w-6xl">
           <Reveal>
-            <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">Theme tracks</h2>
+            <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">
+              Theme <SerifAccent>tracks</SerifAccent>
+            </h2>
             <p className="mt-2 text-muted">
               Accepted contributions will be scheduled across these thematic sessions.
             </p>

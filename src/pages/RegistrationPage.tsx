@@ -1,5 +1,5 @@
 import { registrationFees, registrationIncludes, site } from '../data/site'
-import { Button, PageHero, Reveal, SoftCard } from '../components/ui'
+import { Button, PageHero, Reveal, SerifAccent, SoftCard } from '../components/ui'
 
 export function RegistrationPage() {
   return (
@@ -27,7 +27,9 @@ export function RegistrationPage() {
       <section className="px-5 py-16 sm:px-8 sm:py-20">
         <div className="mx-auto max-w-6xl">
           <Reveal>
-            <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">Registration fees</h2>
+            <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">
+              Registration <SerifAccent>fees</SerifAccent>
+            </h2>
             <p className="mt-2 text-muted">
               Registration was free for all accepted authors. Accepted authors must still complete
               registration by the deadline to confirm their presentation slot.
@@ -74,7 +76,9 @@ export function RegistrationPage() {
       <section className="bg-surface px-5 py-16 sm:px-8 sm:py-20">
         <div className="mx-auto max-w-6xl">
           <Reveal>
-            <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">What registration includes</h2>
+            <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">
+              What registration <SerifAccent>includes</SerifAccent>
+            </h2>
             <p className="mt-2 text-muted">
               Registration provides access to the public components of ICODE2027, including:
             </p>

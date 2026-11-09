@@ -5,7 +5,7 @@ import {
   templateSections,
   themes,
 } from '../data/site'
-import { Button, PageHero, Reveal, SoftCard, Eyebrow } from '../components/ui'
+import { Button, Eyebrow, PageHero, Reveal, SerifAccent, SoftCard } from '../components/ui'
 
 export function CallForPapersPage() {
   return (
@@ -33,7 +33,9 @@ export function CallForPapersPage() {
       <section className="px-5 py-16 sm:px-8 sm:py-20">
         <div className="mx-auto max-w-6xl">
           <Reveal>
-            <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">Key dates</h2>
+            <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">
+              Key <SerifAccent>dates</SerifAccent>
+            </h2>
             <p className="mt-2 text-muted">Plan your submission around these milestones.</p>
           </Reveal>
           <div className="mt-8 grid items-stretch gap-3 md:grid-cols-2 xl:grid-cols-4">
@@ -53,7 +55,9 @@ export function CallForPapersPage() {
       <section className="bg-surface px-5 py-16 sm:px-8 sm:py-20">
         <div className="mx-auto max-w-6xl">
           <Reveal>
-            <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">Conference Themes</h2>
+            <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">
+              Conference <SerifAccent>themes</SerifAccent>
+            </h2>
             <p className="mt-2 text-muted">
               Submissions are invited under, but not limited to, the following themes.
             </p>
@@ -77,7 +81,7 @@ export function CallForPapersPage() {
         <div className="mx-auto max-w-6xl">
           <Reveal>
             <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">
-              Extended Abstract Template — Section Overview
+              Extended abstract <SerifAccent>template</SerifAccent> — section overview
             </h2>
             <p className="mt-2 max-w-3xl text-muted">
               The ICODE2027 extended abstract template (2–3 pages) is designed to keep submissions
@@ -100,7 +104,9 @@ export function CallForPapersPage() {
       <section className="bg-surface px-5 py-16 sm:px-8 sm:py-20">
         <div className="mx-auto max-w-6xl">
           <Reveal>
-            <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">Author Guidelines</h2>
+            <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">
+              Author <SerifAccent>guidelines</SerifAccent>
+            </h2>
             <p className="mt-2 text-muted">Follow these checkpoints to make your submission review-ready.</p>
           </Reveal>
           <div className="mt-8 grid gap-4 lg:grid-cols-2">
