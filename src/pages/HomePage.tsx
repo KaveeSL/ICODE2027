@@ -146,7 +146,7 @@ function Hero({ pinRef }: { pinRef: RefObject<HTMLDivElement | null> }) {
             </motion.span>
           </motion.a>
 
-          <h1 className="max-w-4xl overflow-visible text-[2.75rem] font-medium leading-[1.05] tracking-[-0.04em] text-white min-[400px]:text-[3.25rem] sm:text-6xl md:text-7xl lg:text-8xl">
+          <h1 className="max-w-4xl overflow-visible text-[3.5rem] font-medium leading-[1.05] tracking-[-0.04em] text-white min-[400px]:text-[3.7rem] sm:text-6xl md:text-7xl lg:text-8xl">
             ICODE
             <span className="hero-year-live inline-block py-[0.06em] pr-[0.28em] font-serif italic font-normal leading-none tracking-normal text-lime">
               2027
