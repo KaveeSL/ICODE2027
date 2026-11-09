@@ -8,7 +8,7 @@ export function RegistrationPage() {
         eyebrow="Registration"
         title={
           <>
-            Secure your place at <em className="font-serif italic">ICODE2027</em>
+            Secure your place at <em className="inline-block pr-[0.2em] font-serif italic leading-none">ICODE2027</em>
           </>
         }
         description="Registration will open for authors, delegates, and workshop participants. Fees and programme access details are listed below."

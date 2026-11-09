@@ -23,7 +23,7 @@ export function Footer() {
             </p>
             <h2 className="mx-auto mt-4 max-w-3xl text-[1.5rem] font-medium leading-[1.12] tracking-[-0.02em] text-balance sm:mt-5 sm:text-5xl sm:leading-[1.08]">
               Join the community shaping digital learning for{' '}
-              <span className="inline-block pr-[0.12em] font-serif italic font-normal text-lime">
+              <span className="inline-block pr-[0.22em] font-serif italic font-normal leading-none text-lime">
                 2027
               </span>
               .

@@ -140,9 +140,9 @@ function Hero({ pinRef }: { pinRef: RefObject<HTMLDivElement | null> }) {
             </motion.span>
           </motion.a>
 
-          <h1 className="max-w-4xl text-[2.75rem] font-medium leading-[0.95] tracking-[-0.04em] text-white min-[400px]:text-[3.25rem] sm:text-6xl md:text-7xl lg:text-8xl">
+          <h1 className="max-w-4xl overflow-visible text-[2.75rem] font-medium leading-[1.05] tracking-[-0.04em] text-white min-[400px]:text-[3.25rem] sm:text-6xl md:text-7xl lg:text-8xl">
             ICODE
-            <span className="hero-year-live inline-block font-serif italic font-normal tracking-normal text-lime">
+            <span className="hero-year-live inline-block py-[0.06em] pr-[0.28em] font-serif italic font-normal leading-none tracking-normal text-lime">
               2027
             </span>
           </h1>
@@ -167,25 +167,28 @@ function Hero({ pinRef }: { pinRef: RefObject<HTMLDivElement | null> }) {
               <Button
                 to="/call-for-papers"
                 variant="white"
-                className="w-full shrink-0 !px-4 !py-2.5 text-xs sm:w-auto sm:text-sm"
+                className="!hidden shrink-0 !px-4 !py-2.5 text-xs sm:!inline-flex sm:w-auto sm:text-sm"
               >
                 Submit Abstract
               </Button>
             </div>
           </div>
 
-          <div className="mt-4 flex w-full max-w-[340px] flex-col gap-2 sm:max-w-[420px] sm:flex-row sm:flex-wrap sm:items-center sm:justify-center">
+          <div className="mt-4 flex w-full max-w-[340px] flex-col gap-3 sm:max-w-[420px] sm:flex-row sm:flex-wrap sm:items-center sm:justify-center sm:gap-2">
+            <Button to="/call-for-papers" variant="lime" className="w-full sm:hidden">
+              Submit Abstract
+            </Button>
             <Button
               to="/registration"
               variant="glass"
-              className="w-full !border-white/30 !bg-black/50 !px-4 !py-2 text-xs text-white shadow-[0_8px_24px_rgb(0_0_0_/_0.3)] backdrop-blur-xl sm:w-auto sm:text-sm"
+              className="w-full sm:w-auto sm:!border-white/30 sm:!bg-black/50 sm:!px-4 sm:!py-2 sm:text-sm sm:text-white sm:shadow-[0_8px_24px_rgb(0_0_0_/_0.3)] sm:backdrop-blur-xl"
             >
               View Registration
             </Button>
             <Button
               to="/programme"
               variant="glass"
-              className="w-full !border-white/30 !bg-black/50 !px-4 !py-2 text-xs text-white shadow-[0_8px_24px_rgb(0_0_0_/_0.3)] backdrop-blur-xl sm:w-auto sm:text-sm"
+              className="w-full sm:w-auto sm:!border-white/30 sm:!bg-black/50 sm:!px-4 sm:!py-2 sm:text-sm sm:text-white sm:shadow-[0_8px_24px_rgb(0_0_0_/_0.3)] sm:backdrop-blur-xl"
             >
               View 2-Day Schedule
             </Button>

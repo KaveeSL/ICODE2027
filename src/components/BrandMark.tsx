@@ -43,7 +43,7 @@ export function BrandMark({
         ICODE
         {/* pr keeps italic “7” from clipping; Instrument Serif overhangs the box */}
         <span
-          className={`inline-block overflow-visible pr-[0.14em] font-serif italic font-normal tracking-normal ${accent}`}
+          className={`inline-block overflow-visible pr-[0.28em] font-serif italic font-normal leading-none tracking-normal ${accent}`}
         >
           2027
         </span>

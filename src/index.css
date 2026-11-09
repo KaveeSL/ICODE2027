@@ -129,6 +129,25 @@
   animation: hero-shine 16s ease-in-out infinite;
 }
 
+@media (max-width: 767px) {
+  .hero-year-live,
+  .hero-subtitle-live {
+    animation: none !important;
+  }
+
+  .hero-year-live {
+    filter: none;
+    text-shadow: none;
+  }
+
+  .hero-subtitle-live {
+    color: white;
+    background: none;
+    -webkit-background-clip: unset;
+    background-clip: unset;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .animate-fade-up,
   .animate-fade-in,

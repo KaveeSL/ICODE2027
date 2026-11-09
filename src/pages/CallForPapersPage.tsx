@@ -14,7 +14,7 @@ export function CallForPapersPage() {
         eyebrow="Call for Papers"
         title={
           <>
-            Submit your extended abstract to <em className="font-serif italic">ICODE2027</em>
+            Submit your extended abstract to <em className="inline-block pr-[0.2em] font-serif italic leading-none">ICODE2027</em>
           </>
         }
         description="2–3 page extended abstracts presenting research, design-based studies, innovative practices, policy analyses, or case studies in open and digital education."

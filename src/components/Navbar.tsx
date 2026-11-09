@@ -42,7 +42,7 @@ export function Navbar() {
 
   const mobileShell = !solid
     ? 'border border-transparent bg-transparent shadow-none backdrop-blur-0'
-    : 'border border-white/10 bg-black/90 shadow-[0_16px_40px_rgb(0_0_0_/_0.3)] backdrop-blur-xl'
+    : 'border border-white/10 bg-black/90 shadow-[0_16px_40px_rgb(0_0_0_/_0.3)]'
 
   const linkClass =
     'rounded-full px-3.5 py-2 text-sm font-medium text-white/85 transition-all duration-200 hover:bg-white/10 hover:text-white'
