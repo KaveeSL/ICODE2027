@@ -2,7 +2,7 @@ export const site = {
   name: 'ICODE2027',
   fullName: 'International Conference on Open and Digital Education',
   year: 2027,
-  datesLabel: '4–5 August 2027',
+  datesLabel: '21–22 September 2027',
   location: 'Colombo · Sri Lanka · Hybrid',
   organizer: 'Centre for Open and Distance Learning (CODL), University of Moratuwa',
   shortOrg: 'CODL · University of Moratuwa',
@@ -45,31 +45,31 @@ export const pageLinks = [
 export const importantDates = [
   {
     label: 'Submissions Open',
-    date: '1 April 2027',
+    date: 'TBC',
     note: 'Extended abstract submissions open',
     status: 'upcoming' as const,
   },
   {
     label: 'Submission Deadline',
-    date: '18 July 2027',
+    date: 'TBC',
     note: 'Extended abstract submission closes',
     status: 'upcoming' as const,
   },
   {
     label: 'Acceptance notification',
-    date: '19 July 2027',
+    date: 'TBC',
     note: 'Authors notified of decisions',
     status: 'upcoming' as const,
   },
   {
     label: 'Registration deadline',
-    date: '30 July 2027',
+    date: 'TBC',
     note: 'Confirm your place and presentation slot',
     status: 'upcoming' as const,
   },
   {
     label: 'ICODE2027',
-    date: '4–5 August 2027',
+    date: '21–22 September 2027',
     note: 'Two-day hybrid conference',
     status: 'event' as const,
   },
@@ -79,23 +79,8 @@ export const programmeDays = [
   {
     slug: 'day1',
     day: 'Day 1',
-    title: 'Academic Research Conference',
-    date: '4 August 2027',
-    venue: 'University of Moratuwa, Sri Lanka',
-    summary:
-      'A peer-reviewed research forum for scholars exploring the future of open, distance, and digital education.',
-    points: [
-      'Keynote addresses and invited talks',
-      'Parallel abstract presentations and symposia',
-      'Interactive sessions and live demonstrations',
-      'Best presentation recognitions',
-    ],
-  },
-  {
-    slug: 'day2',
-    day: 'Day 2',
-    title: 'Practice & Innovation Workshops',
-    date: '5 August 2027',
+    title: 'Workshop',
+    date: '21 September 2027',
     venue: 'University of Moratuwa, Sri Lanka',
     summary:
       'Deep-dive, hands-on sessions for instructional designers, Moodle administrators, faculty, and EdTech teams.',
@@ -104,6 +89,21 @@ export const programmeDays = [
       'Learning analytics and AI tools',
       'Case-based institutional showcases',
       'Micro-credential and recognition dialogues',
+    ],
+  },
+  {
+    slug: 'day2',
+    day: 'Day 2',
+    title: 'Conference',
+    date: '22 September 2027',
+    venue: 'University of Moratuwa, Sri Lanka',
+    summary:
+      'A peer-reviewed research forum for scholars exploring the future of open, distance, and digital education.',
+    points: [
+      'Keynote addresses and invited talks',
+      'Parallel abstract presentations and symposia',
+      'Interactive sessions and live demonstrations',
+      'Best presentation recognitions',
     ],
   },
 ]
@@ -144,11 +144,11 @@ export const themes = [
 ]
 
 export const partners = [
-  { name: 'University of Moratuwa', role: 'Hosting Partner' },
-  { name: 'CODL', role: 'Organised by' },
-  { name: 'Ministry of Digital Economy', role: 'Government Partner' },
-  { name: 'Emojot', role: 'Engagement Partner' },
-  { name: 'Lanka IOC / SERVO', role: 'Hospitality Partner' },
+  { id: 'partner-1' },
+  { id: 'partner-2' },
+  { id: 'partner-3' },
+  { id: 'partner-4' },
+  { id: 'partner-5' },
 ]
 
 export const faqs = [
@@ -156,8 +156,8 @@ export const faqs = [
     id: 'format',
     question: 'What is the event format?',
     answer: [
-      'Day 1 – Academic Research Conference',
-      'Day 2 – Practice & Innovation Workshops',
+      'Day 1 – Workshop',
+      'Day 2 – Conference',
       'Hybrid participation with on-site and online options',
     ],
   },
@@ -184,8 +184,8 @@ export const faqs = [
     question: 'Where will the conference take place?',
     answer: [
       'ICODE2027 is a hybrid conference with on-site sessions at the University of Moratuwa and a fully supported virtual track for remote participation.',
-      'Day 1 – Academic Research Conference (4 August 2027): University of Moratuwa, Sri Lanka',
-      'Day 2 – Practice & Innovation Workshops (5 August 2027): University of Moratuwa, Sri Lanka',
+      'Day 1 – Workshop (21 September 2027): University of Moratuwa, Sri Lanka',
+      'Day 2 – Conference (22 September 2027): University of Moratuwa, Sri Lanka',
     ],
   },
   {
@@ -212,8 +212,8 @@ export const registrationFees = [
 ]
 
 export const registrationIncludes = [
-  'Academic research sessions on 4 August 2027',
-  'Practice and innovation workshops on 5 August 2027',
+  'Workshop sessions on 21 September 2027',
+  'Conference sessions on 22 September 2027',
   'Keynote and invited sessions',
   'Refreshments and lunch during registered conference/workshop days',
 ]

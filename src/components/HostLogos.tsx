@@ -39,18 +39,19 @@ export function HostLogos({ variant = 'footer', className = '' }: HostLogosProps
   if (variant === 'about') {
     return (
       <div
-        className={`flex flex-wrap items-center gap-x-5 gap-y-3 ${className}`}
+        className={`flex flex-wrap items-center gap-x-4 gap-y-2 ${className}`}
         aria-label="Host institutions"
       >
         {hosts.map((host) => (
-          <div key={host.name} className="flex min-w-0 items-center gap-2.5">
+          <div key={host.name} className="flex min-w-0 items-center gap-2">
             <img
               src={host.src}
-              alt={host.name}
-              className="h-9 w-auto max-w-[84px] object-contain sm:h-11 sm:max-w-[100px]"
+              alt=""
+              className="h-7 w-auto max-w-[44px] shrink-0 object-contain sm:h-8 sm:max-w-[52px]"
             />
-            <p className="text-[10px] font-medium uppercase tracking-[0.14em] text-black/45 sm:text-[11px]">
-              {host.role}
+            <p className="min-w-0 text-[13px] leading-tight tracking-tight text-black">
+              <span className="font-medium">{host.name}</span>
+              <span className="whitespace-nowrap text-black/40"> · {host.role}</span>
             </p>
           </div>
         ))}
@@ -59,15 +60,18 @@ export function HostLogos({ variant = 'footer', className = '' }: HostLogosProps
   }
 
   return (
-    <div className={`flex flex-wrap items-center gap-x-4 gap-y-3 ${className}`}>
+    <div className={`flex flex-wrap items-center gap-x-4 gap-y-2 ${className}`}>
       {hosts.map((host) => (
-        <div key={host.name} className="flex min-w-0 items-center gap-2.5 sm:gap-3">
+        <div key={host.name} className="flex min-w-0 items-center gap-2">
           <img
             src={host.src}
-            alt={host.name}
-            className="h-9 w-auto max-w-[72px] object-contain sm:h-11 sm:max-w-none"
+            alt=""
+            className="h-7 w-auto max-w-[40px] shrink-0 object-contain sm:h-8 sm:max-w-[48px]"
           />
-          <p className="text-[10px] uppercase tracking-[0.12em] text-white/45">{host.role}</p>
+          <p className="min-w-0 text-[13px] leading-tight tracking-tight text-white">
+            <span className="font-medium">{host.name}</span>
+            <span className="whitespace-nowrap text-white/45"> · {host.role}</span>
+          </p>
         </div>
       ))}
     </div>

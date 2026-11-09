@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { ChevronDown } from 'lucide-react'
 import { motion, useReducedMotion } from 'framer-motion'
 import { useState, type ReactNode } from 'react'
+import { publicAsset } from '../publicAsset'
 
 export function Eyebrow({
   children,
@@ -258,16 +259,35 @@ export function PageHero({
   description: ReactNode
   actions?: ReactNode
 }) {
+  const reduce = useReducedMotion()
   return (
     <section className="relative isolate min-h-[70svh] overflow-hidden">
       <motion.div
-        className="absolute inset-0 bg-cover bg-center"
-        style={{ backgroundImage: "url('/images/hero-bg.jpg')" }}
-        initial={{ scale: 1.06 }}
+        className="absolute inset-0 overflow-hidden bg-[#050505]"
+        initial={reduce ? false : { scale: 1.06 }}
         animate={{ scale: 1 }}
         transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1] }}
         aria-hidden
-      />
+      >
+        {reduce ? (
+          <div
+            className="absolute inset-0 bg-cover bg-center"
+            style={{ backgroundImage: `url('${publicAsset('/images/hero-bg.jpg')}')` }}
+          />
+        ) : (
+          <video
+            className="absolute inset-0 h-full w-full object-cover"
+            autoPlay
+            muted
+            loop
+            playsInline
+            poster={publicAsset('/images/hero-bg.jpg')}
+            preload="auto"
+          >
+            <source src={publicAsset('/videos/hero-hall-loop.mp4')} type="video/mp4" />
+          </video>
+        )}
+      </motion.div>
       <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-black/55" />
       <div className="relative mx-auto flex min-h-[70svh] max-w-5xl flex-col items-center justify-center px-4 pb-14 pt-28 text-center sm:px-6 sm:pb-16">
         <motion.div

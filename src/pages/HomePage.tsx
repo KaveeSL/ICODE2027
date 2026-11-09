@@ -35,8 +35,7 @@ import {
   SoftCard,
   TextLink,
 } from '../components/ui'
-import uomLogo from '../assets/logo/logo.png'
-import codlLogo from '../assets/logo/codllogo.png'
+import { publicAsset } from '../publicAsset'
 
 const whyIcons = [Presentation, Handshake, Lightbulb, Globe2, Sparkles, Users]
 const audienceIcons = [GraduationCap, Users, Building2]
@@ -57,15 +56,28 @@ function Hero({ pinRef }: { pinRef: RefObject<HTMLDivElement | null> }) {
       className="sticky top-0 z-0 h-svh w-full overflow-hidden"
     >
       <motion.div
-        className="absolute inset-0 z-0 overflow-hidden bg-cover bg-center will-change-transform"
-        style={{
-          backgroundImage: "url('/images/hero-bg.jpg')",
-          backgroundColor: '#050505',
-          backgroundPosition: 'center',
-          scale: bgScale,
-        }}
+        className="absolute inset-0 z-0 overflow-hidden bg-[#050505] will-change-transform"
+        style={{ scale: bgScale }}
         aria-hidden
       >
+        {reduce ? (
+          <div
+            className="absolute inset-0 bg-cover bg-center"
+            style={{ backgroundImage: `url('${publicAsset('/images/hero-bg.jpg')}')` }}
+          />
+        ) : (
+          <video
+            className="absolute inset-0 h-full w-full object-cover"
+            autoPlay
+            muted
+            loop
+            playsInline
+            poster={publicAsset('/images/hero-bg.jpg')}
+            preload="auto"
+          >
+            <source src={publicAsset('/videos/hero-hall-loop.mp4')} type="video/mp4" />
+          </video>
+        )}
         {/* Scrim for white hero type over dark conference hall */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-black/45" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_40%,rgb(0_0_0_/_0.3)_100%)]" />
@@ -431,43 +443,11 @@ export function HomePage() {
               />
             </Reveal>
             <div className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
-              {partners.map((partner, i) => {
-                const logo =
-                  partner.name === 'University of Moratuwa'
-                    ? uomLogo
-                    : partner.name === 'CODL'
-                      ? codlLogo
-                      : null
-                return (
-                  <Reveal key={partner.name} delay={i * 0.05} scale>
-                    <motion.div
-                      whileHover={{ y: -4 }}
-                      transition={{ type: 'spring', stiffness: 360, damping: 24 }}
-                      className="flex h-full flex-col items-center justify-center rounded-2xl bg-surface px-4 py-6 text-center transition-colors hover:bg-surface-2"
-                    >
-                      {logo ? (
-                        <>
-                          <img
-                            src={logo}
-                            alt={partner.name}
-                            className="h-16 w-auto max-w-[140px] object-contain"
-                          />
-                          <p className="mt-3 text-[11px] uppercase tracking-[0.14em] text-black/40">
-                            {partner.role}
-                          </p>
-                        </>
-                      ) : (
-                        <>
-                          <p className="text-sm font-medium tracking-tight">{partner.name}</p>
-                          <p className="mt-1 text-[11px] uppercase tracking-[0.14em] text-black/40">
-                            {partner.role}
-                          </p>
-                        </>
-                      )}
-                    </motion.div>
-                  </Reveal>
-                )
-              })}
+              {partners.map((partner, i) => (
+                <Reveal key={partner.id} delay={i * 0.05}>
+                  <div className="h-28 rounded-2xl bg-surface" aria-hidden />
+                </Reveal>
+              ))}
             </div>
           </div>
         </section>
