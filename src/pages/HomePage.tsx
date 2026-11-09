@@ -1,4 +1,4 @@
-import { useRef, type RefObject } from 'react'
+import { useRef, useState, type RefObject } from 'react'
 import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion'
 import {
   Building2,
@@ -42,6 +42,12 @@ const audienceIcons = [GraduationCap, Users, Building2]
 
 function Hero({ pinRef }: { pinRef: RefObject<HTMLDivElement | null> }) {
   const reduce = useReducedMotion()
+  // Same loop, smaller decode on phones. Chosen once so scrolling never swaps the clip.
+  const [heroVideo] = useState(() =>
+    window.matchMedia('(max-width: 767px)').matches
+      ? publicAsset('/videos/hero-hall-loop-mobile.mp4')
+      : publicAsset('/videos/hero-hall-loop.mp4'),
+  )
   // Track the tall pin container (Ceynk: h-[250svh]) — sticky alone doesn't advance progress
   const { scrollYProgress } = useScroll({
     target: pinRef,
@@ -56,7 +62,7 @@ function Hero({ pinRef }: { pinRef: RefObject<HTMLDivElement | null> }) {
       className="sticky top-0 z-0 h-svh w-full overflow-hidden"
     >
       <motion.div
-        className="absolute inset-0 z-0 overflow-hidden bg-[#050505] will-change-transform"
+        className="absolute inset-0 z-0 bg-[#050505] transform-gpu will-change-transform"
         style={{ scale: bgScale }}
         aria-hidden
       >
@@ -67,15 +73,15 @@ function Hero({ pinRef }: { pinRef: RefObject<HTMLDivElement | null> }) {
           />
         ) : (
           <video
-            className="absolute inset-0 h-full w-full object-cover"
+            className="absolute inset-0 h-full w-full object-cover [transform:translateZ(0)]"
             autoPlay
             muted
             loop
             playsInline
             poster={publicAsset('/images/hero-bg.jpg')}
-            preload="auto"
+            preload="metadata"
           >
-            <source src={publicAsset('/videos/hero-hall-loop.mp4')} type="video/mp4" />
+            <source src={heroVideo} type="video/mp4" />
           </video>
         )}
         {/* Scrim for white hero type over dark conference hall */}
@@ -85,7 +91,7 @@ function Hero({ pinRef }: { pinRef: RefObject<HTMLDivElement | null> }) {
 
       <motion.div
         style={{ opacity: copyOpacity, y: copyY }}
-        className="absolute inset-x-0 top-[10svh] z-30 flex flex-col items-center px-5 text-center will-change-transform sm:top-[14svh] sm:px-6"
+        className="absolute inset-x-0 top-[18svh] z-30 flex flex-col items-center px-5 text-center will-change-transform sm:top-[14svh] sm:px-6"
       >
         <motion.div
           initial={reduce ? false : { opacity: 0, y: 28 }}
@@ -97,7 +103,7 @@ function Hero({ pinRef }: { pinRef: RefObject<HTMLDivElement | null> }) {
             href={site.previousConferenceUrl}
             target="_blank"
             rel="noreferrer"
-            className="relative mb-3 mt-2 inline-flex max-w-full items-center gap-1.5 overflow-hidden rounded-full border border-lime/55 bg-white/10 px-3 py-1 text-[11px] font-medium text-white/90 backdrop-blur-md transition-colors hover:border-lime/75 hover:bg-white/15 sm:mb-4 sm:mt-4 sm:gap-2 sm:px-3.5 sm:text-xs"
+            className="relative mb-3 mt-2 inline-flex max-w-full items-center gap-1.5 overflow-hidden rounded-full border border-lime/55 bg-white/15 px-3 py-1 text-[11px] font-medium text-white/90 transition-colors hover:border-lime/75 hover:bg-white/20 sm:mb-4 sm:mt-4 sm:gap-2 sm:px-3.5 sm:text-xs"
             animate={
               reduce
                 ? undefined
@@ -158,7 +164,7 @@ function Hero({ pinRef }: { pinRef: RefObject<HTMLDivElement | null> }) {
           </p>
 
           <div className="relative mt-5 w-full max-w-[340px] sm:max-w-[420px]">
-            <div className="flex flex-col gap-2 rounded-[1.35rem] border border-white/25 bg-black/55 p-1.5 shadow-[0_8px_32px_rgb(0_0_0_/_0.35)] backdrop-blur-xl sm:flex-row sm:items-center sm:rounded-full sm:gap-0">
+            <div className="flex flex-col gap-2 rounded-[1.35rem] border border-white/25 bg-black/70 p-1.5 shadow-[0_8px_32px_rgb(0_0_0_/_0.35)] sm:flex-row sm:items-center sm:rounded-full sm:gap-0">
               <div className="flex min-w-0 flex-1 flex-wrap items-center justify-center gap-x-2 gap-y-0.5 px-3 py-2 text-center text-sm text-white sm:justify-start sm:text-left">
                 <span className="font-medium whitespace-nowrap">{site.datesLabel}</span>
                 <span className="text-white/45">·</span>
@@ -167,7 +173,7 @@ function Hero({ pinRef }: { pinRef: RefObject<HTMLDivElement | null> }) {
               <Button
                 to="/call-for-papers"
                 variant="white"
-                className="!hidden shrink-0 !px-4 !py-2.5 text-xs sm:!inline-flex sm:w-auto sm:text-sm"
+                className="!hidden shrink-0 !px-4 !py-2.5 text-xs sm:!inline-flex sm:w-auto sm:!py-3.5 sm:text-sm"
               >
                 Submit Abstract
               </Button>
@@ -181,14 +187,14 @@ function Hero({ pinRef }: { pinRef: RefObject<HTMLDivElement | null> }) {
             <Button
               to="/registration"
               variant="glass"
-              className="w-full sm:w-auto sm:!border-white/30 sm:!bg-black/50 sm:!px-4 sm:!py-2 sm:text-sm sm:text-white sm:shadow-[0_8px_24px_rgb(0_0_0_/_0.3)] sm:backdrop-blur-xl"
+              className="w-full !bg-white/12 !backdrop-blur-none sm:w-auto sm:!border-white/30 sm:!bg-black/70 sm:!px-4 sm:!py-2 sm:text-sm sm:text-white sm:shadow-[0_8px_24px_rgb(0_0_0_/_0.3)] sm:!backdrop-blur-none"
             >
               View Registration
             </Button>
             <Button
               to="/programme"
               variant="glass"
-              className="w-full sm:w-auto sm:!border-white/30 sm:!bg-black/50 sm:!px-4 sm:!py-2 sm:text-sm sm:text-white sm:shadow-[0_8px_24px_rgb(0_0_0_/_0.3)] sm:backdrop-blur-xl"
+              className="w-full !bg-white/12 !backdrop-blur-none sm:w-auto sm:!border-white/30 sm:!bg-black/70 sm:!px-4 sm:!py-2 sm:text-sm sm:text-white sm:shadow-[0_8px_24px_rgb(0_0_0_/_0.3)] sm:!backdrop-blur-none"
             >
               View 2-Day Schedule
             </Button>

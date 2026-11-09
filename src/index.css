@@ -130,21 +130,10 @@
 }
 
 @media (max-width: 767px) {
-  .hero-year-live,
-  .hero-subtitle-live {
-    animation: none !important;
-  }
-
   .hero-year-live {
+    animation: none !important;
     filter: none;
     text-shadow: none;
-  }
-
-  .hero-subtitle-live {
-    color: white;
-    background: none;
-    -webkit-background-clip: unset;
-    background-clip: unset;
   }
 }
 
