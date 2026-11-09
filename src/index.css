@@ -10,8 +10,8 @@
   --color-surface: #f5f5f7;
   --color-surface-2: #eeeeef;
   --color-line: #e8e8ea;
-  --color-lime: #fed000;
-  --color-lime-deep: #e6be00;
+  --color-lime: #e0ff32;
+  --color-lime-deep: #d4f528;
   --color-teal: #009767;
 }
 
@@ -96,7 +96,7 @@
   }
   50% {
     filter: brightness(1.12);
-    text-shadow: 0 0 22px rgb(254 208 0 / 0.35);
+    text-shadow: 0 0 22px rgb(224 255 50 / 0.35);
   }
 }
 
@@ -118,7 +118,7 @@
     90deg,
     rgb(255 255 255 / 1) 0%,
     rgb(255 255 255 / 1) 38%,
-    rgb(254 208 0 / 0.95) 50%,
+    rgb(224 255 50 / 0.95) 50%,
     rgb(255 255 255 / 1) 62%,
     rgb(255 255 255 / 1) 100%
   );

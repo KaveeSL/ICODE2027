@@ -28,8 +28,8 @@ export function BrandMark({
   const location = useLocation()
   const navigate = useNavigate()
 
-  // On a light navbar, use a deeper gold so it stays readable
-  const accent = light ? 'text-lime' : 'text-[#B58F00]'
+  // On frosted light navbar, use deeper lime so it stays readable
+  const accent = light ? 'text-lime' : 'text-[#7A9A00]'
 
   const content = (
     <motion.span
