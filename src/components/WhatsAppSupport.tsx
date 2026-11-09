@@ -79,7 +79,7 @@ export function WhatsAppSupport() {
   }, [open, reduce])
 
   return (
-    <div className="fixed bottom-[max(1rem,env(safe-area-inset-bottom))] right-[max(1rem,env(safe-area-inset-right))] z-50 flex max-w-[calc(100vw-1.5rem)] flex-col items-end gap-2 sm:flex-row sm:items-end sm:gap-2.5">
+    <div className="fixed bottom-[max(1rem,env(safe-area-inset-bottom))] right-[max(1rem,env(safe-area-inset-right))] z-50 flex max-w-[calc(100vw-1.5rem)] flex-row items-end gap-2 sm:gap-2.5">
       <AnimatePresence>
         {open ? (
           <motion.div

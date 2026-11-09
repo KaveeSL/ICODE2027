@@ -163,38 +163,30 @@ function Hero({ pinRef }: { pinRef: RefObject<HTMLDivElement | null> }) {
             Moratuwa. Hybrid event in Colombo, {site.datesLabel}.
           </p>
 
-          <div className="relative mt-5 w-full max-w-[340px] sm:max-w-[420px]">
-            <div className="flex flex-col gap-2 rounded-[1.35rem] border border-white/25 bg-black/70 p-1.5 shadow-[0_8px_32px_rgb(0_0_0_/_0.35)] sm:flex-row sm:items-center sm:rounded-full sm:gap-0">
-              <div className="flex min-w-0 flex-1 flex-wrap items-center justify-center gap-x-2 gap-y-0.5 px-3 py-2 text-center text-sm text-white sm:justify-start sm:text-left">
-                <span className="font-medium whitespace-nowrap">{site.datesLabel}</span>
-                <span className="text-white/45">·</span>
-                <span className="text-white/85 whitespace-nowrap">Hybrid · Colombo</span>
-              </div>
-              <Button
-                to="/call-for-papers"
-                variant="white"
-                className="!hidden shrink-0 !px-4 !py-2.5 text-xs sm:!inline-flex sm:w-auto sm:!py-3.5 sm:text-sm"
-              >
-                Submit Abstract
-              </Button>
+          <div className="mt-5 flex w-full max-w-[340px] flex-col gap-3 sm:max-w-[440px]">
+            <div className="rounded-[1.35rem] border border-white/25 bg-black/70 px-4 py-3.5 text-center text-sm text-white shadow-[0_8px_32px_rgb(0_0_0_/_0.35)] sm:px-5 sm:py-4 sm:text-base">
+              <span className="font-medium whitespace-nowrap">{site.datesLabel}</span>
+              <span className="text-white/45"> · </span>
+              <span className="text-white/85 whitespace-nowrap">Hybrid · Colombo</span>
             </div>
-          </div>
-
-          <div className="mt-4 flex w-full max-w-[340px] flex-col gap-3 sm:max-w-[420px] sm:flex-row sm:flex-wrap sm:items-center sm:justify-center sm:gap-2">
-            <Button to="/call-for-papers" variant="lime" className="w-full sm:hidden">
+            <Button
+              to="/call-for-papers"
+              variant="lime"
+              className="w-full sm:py-3.5 sm:text-base"
+            >
               Submit Abstract
             </Button>
             <Button
               to="/registration"
               variant="glass"
-              className="w-full !bg-white/12 !backdrop-blur-none sm:w-auto sm:!border-white/30 sm:!bg-black/70 sm:!px-4 sm:!py-2 sm:text-sm sm:text-white sm:shadow-[0_8px_24px_rgb(0_0_0_/_0.3)] sm:!backdrop-blur-none"
+              className="w-full !bg-white/12 !backdrop-blur-none sm:py-3.5 sm:text-base"
             >
               View Registration
             </Button>
             <Button
               to="/programme"
               variant="glass"
-              className="w-full !bg-white/12 !backdrop-blur-none sm:w-auto sm:!border-white/30 sm:!bg-black/70 sm:!px-4 sm:!py-2 sm:text-sm sm:text-white sm:shadow-[0_8px_24px_rgb(0_0_0_/_0.3)] sm:!backdrop-blur-none"
+              className="w-full !bg-white/12 !backdrop-blur-none sm:py-3.5 sm:text-base"
             >
               View 2-Day Schedule
             </Button>
